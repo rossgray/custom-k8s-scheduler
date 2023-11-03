@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-minikube-1
+  name: hello-minikube-1
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-minikube-1
+  template:
+    metadata:
+      labels:
+        app: hello-minikube-1
+        nodeGroup: "1"
+    spec:
+      containers:
+      - image: kicbase/echo-server:1.0
+        imagePullPolicy: IfNotPresent
+        name: echo-server
+      restartPolicy: Always
+      schedulerName: custom-scheduler
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-minikube-2
+  name: hello-minikube-2
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-minikube-2
+  template:
+    metadata:
+      labels:
+        app: hello-minikube-2
+        nodeGroup: "2"
+    spec:
+      containers:
+      - image: kicbase/echo-server:1.0
+        imagePullPolicy: IfNotPresent
+        name: echo-server
+      restartPolicy: Always
+      schedulerName: custom-scheduler
