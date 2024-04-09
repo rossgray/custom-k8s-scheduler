@@ -11,7 +11,7 @@ Below are some instructions for testing out the custom scheduler using minikube.
     ```shell
     minikube addons enable registry -p custom-scheduler-demo
     ```
-4. We also need to [enable insecure registries](https://minikube.sigs.k8s.io/docs/handbook/registry/#enabling-insecure-registries) so that we can push images without needing to provision TLS certificates:
+4. We also need to [enable insecure registries](https://minikube.sigs.k8s.io/docs/handbook/registry/#enabling-insecure-registries) so that we can push images without needing to provision TLS certificates (this should be run in a separate terminal):
     ```shell
     docker run --rm -it --network=host alpine ash -c "apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:$(minikube ip -p custom-scheduler-demo):5000"
     ```
